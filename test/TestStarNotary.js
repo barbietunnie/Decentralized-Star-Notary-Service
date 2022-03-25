@@ -84,24 +84,38 @@ it('can add the star name and star symbol properly', async() => {
 
     //2. Call the name and symbol properties in your Smart Contract and compare with the name and symbol provided
     await instance.tokenIdToStarInfo.call(tokenId);
-    assert.equal(await instance.name.call(), 'UDCStar');
-    assert.equal(await instance.symbol.call(), 'UDCS');
+    assert.equal(await instance.name.call(), 'StarNotary');
+    assert.equal(await instance.symbol.call(), 'SNT');
 });
 
 it('lets 2 users exchange stars', async() => {
     // 1. create 2 Stars with different tokenId
+    let instance = await StarNotary.deployed();
+    const tokenId1 = 259;
+    const tokenId2 = 351;
+
+    const account1 = accounts[1];
+    const account2 = accounts[2];
+    
+    await instance.createStar('First star', tokenId1, {from: account1});
+    await instance.createStar('Second star', tokenId2, {from: account2});
+
     // 2. Call the exchangeStars functions implemented in the Smart Contract
+    await instance.exchangeStars(tokenId1, tokenId2, {from: account1});
+
     // 3. Verify that the owners changed
+    assert.equal(await instance.ownerOf(tokenId1), account2);
+    assert.equal(await instance.ownerOf(tokenId2), account1);
 });
 
-it('lets a user transfer a star', async() => {
-    // 1. create a Star with different tokenId
-    // 2. use the transferStar function implemented in the Smart Contract
-    // 3. Verify the star owner changed.
-});
+// it('lets a user transfer a star', async() => {
+//     // 1. create a Star with different tokenId
+//     // 2. use the transferStar function implemented in the Smart Contract
+//     // 3. Verify the star owner changed.
+// });
 
-it('lookUptokenIdToStarInfo test', async() => {
-    // 1. create a Star with different tokenId
-    // 2. Call your method lookUptokenIdToStarInfo
-    // 3. Verify if you Star name is the same
-});
+// it('lookUptokenIdToStarInfo test', async() => {
+//     // 1. create a Star with different tokenId
+//     // 2. Call your method lookUptokenIdToStarInfo
+//     // 3. Verify if you Star name is the same
+// });
