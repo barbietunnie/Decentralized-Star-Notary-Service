@@ -7,6 +7,8 @@ build
 
 # misc
 .DS_Store
+.infura
+.secret
 .env.local
 .env.development.local
 .env.test.local
