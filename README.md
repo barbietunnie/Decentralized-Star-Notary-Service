@@ -44,10 +44,32 @@ For this project, you will need to have:
     npm install
     ```
 
+2. Setup Truffle (_Optional_)
 
-2. Start Truffle
+    ```
+    # Unsinstall any previous version
+    npm uninstall -g truffle
+    
+    # Specify a particular version
+    npm install -g truffle@5.0.3
+
+    # Install truffle hd wallet
+    npm install truffle-hdwallet-provider@web3-one
+
+    # Due to bugs in truffle 5.0.3, use the fix below
+    npm install any-promise bindings --save-dev
+
+    # Verify the version
+    truffle version
+    ```
+
+3. Start Truffle
 
     ```bash
+    # Install truffle if not already installed
+    npm i -g truffle@5.0.3
+
+
     # For starting the development console
     truffle develop
     # truffle console
@@ -62,7 +84,7 @@ For this project, you will need to have:
     test
     ```
 
-3. Frontend - Once you are ready to start your frontend, run the following from the app folder:
+4. Frontend - Once you are ready to start your frontend, run the following from the app folder:
 
 
     ```bash
